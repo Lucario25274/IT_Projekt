@@ -209,14 +209,9 @@ $$\vec{f}_1 = \frac{d\vec{x}\,'_1}{dt'}, \qquad \vec{f}_2 = \frac{d\vec{x}\,'_2}
 
 Damit erhält man das vollständige System erster Ordnung:
 
-$$\boxed{\begin{aligned}
-\frac{d\vec{x}\,'_1}{dt'} &= \vec{f}_1 \\[6pt]
-\frac{d\vec{x}\,'_2}{dt'} &= \vec{f}_2 \\[6pt]
-\frac{d\vec{x}\,'_3}{dt'} &= \vec{f}_3 \\[10pt]
-\frac{d\vec{f}_1}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}{|\vec{x}\,'_3 - \vec{x}\,'_1|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_1}{|\vec{x}\,'_2 - \vec{x}\,'_1|^3} \\[6pt]
-\frac{d\vec{f}_2}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_2}{|\vec{x}\,'_3 - \vec{x}\,'_2|^3} + m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_2}{|\vec{x}\,'_1 - \vec{x}\,'_2|^3} \\[6pt]
-\frac{d\vec{f}_3}{dt'} &= m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_3}{|\vec{x}\,'_1 - \vec{x}\,'_3|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_3}{|\vec{x}\,'_2 - \vec{x}\,'_3|^3}
-\end{aligned}}$$
+```math
+\boxed{\begin{aligned} \frac{d\vec{x}\,'_1}{dt'} &= \vec{f}_1 \\[6pt] \frac{d\vec{x}\,'_2}{dt'} &= \vec{f}_2 \\[6pt] \frac{d\vec{x}\,'_3}{dt'} &= \vec{f}_3 \\[10pt] \frac{d\vec{f}_1}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}{|\vec{x}\,'_3 - \vec{x}\,'_1|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_1}{|\vec{x}\,'_2 - \vec{x}\,'_1|^3} \\[6pt] \frac{d\vec{f}_2}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_2}{|\vec{x}\,'_3 - \vec{x}\,'_2|^3} + m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_2}{|\vec{x}\,'_1 - \vec{x}\,'_2|^3} \\[6pt] \frac{d\vec{f}_3}{dt'} &= m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_3}{|\vec{x}\,'_1 - \vec{x}\,'_3|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_3}{|\vec{x}\,'_2 - \vec{x}\,'_3|^3} \end{aligned}}
+```
 
 ---
 
