@@ -41,3 +41,31 @@ def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind masse
     return np.array([f1, f2, f3, df1_dt, df2_dt, df3_dt]).ravel() #wieder 1D array zurückgeben für solve_ivp
 
 
+time_start , time_end = 0, 10
+t_points = np.linspace(time_start, time_end, 2001) 
+
+t1 =time.time()
+solution= solve_ivp(
+    fun=system_odes,                    #die funktion die die differenzialgleichungen definiert
+    t_span=(time_start, time_end),      #zeitspanne für die integration
+    y0=anfangsbedingungen,              #anfangsbedingungen für die integration
+    t_eval=t_points,                #zeitpunktewo Lösung ausgewertet wird oll
+    args=(m1, m2, m3)           #zusätzliche argumente für system_odes funktion sodass sie in der funktion verwendet werden können
+
+)
+
+t_sol = solution.t
+#positionen der planeten durch berechnung 
+p1x_sol = solution.y[0]
+p1y_sol = solution.y[1]
+p1z_sol = solution.y[2]
+
+p2x_sol = solution.y[3]
+p2y_sol = solution.y[4]
+p2z_sol = solution.y[5]
+
+p3x_sol = solution.y[6]
+p3y_sol = solution.y[7]
+p3z_sol = solution.y[8]
+# print(p1x_sol)
+
