@@ -7,13 +7,11 @@ import time
 # anfangsbedingungen und konstanten 
 
 m1, m2, m3 = 1.0, 1.0, 1.0
-
-#postionen 
+ 
 start_postion_1 = [1.0, 0.0, 1.0]
 start_postion_2 = [1.0, 1.0, 0.0]
 start_postion_3 = [0.0, 1.0, 1.0]
 
-#geschwindigkeiten
 start_geschwindigkeit_1 = [0.0, 0.0, -1.0]
 start_geschwindigkeit_2 = [0.0, 0.0, 1.0]
 start_geschwindigkeit_3 = [0.0, 0.0, -0.6]
@@ -22,7 +20,7 @@ start_geschwindigkeit_3 = [0.0, 0.0, -0.6]
 anfangsbedingungen = np.array([
     start_postion_1, start_postion_2, start_postion_3,
     start_geschwindigkeit_1, start_geschwindigkeit_2, start_geschwindigkeit_3
-]).ravel()     #macht aus  2D array eine 1D array, damit solveivp klappt
+]).ravel()     #macht aus  2D array eine 1D array, damit solve ivp klappt
 
 def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind massen der planeten für berechnung der beschleunigung
 
@@ -54,6 +52,7 @@ solution= solve_ivp(
 
 )
 
+
 t_sol = solution.t
 #positionen der planeten durch berechnung 
 p1x_sol = solution.y[0]
@@ -69,3 +68,27 @@ p3y_sol = solution.y[7]
 p3z_sol = solution.y[8]
 # print(p1x_sol)
 
+solution.y.shape
+
+# für bildung von 3D grafik
+fig, ax = plt.subplots(subplot_kw={"projection":"3d"})
+
+ #für die bahnen der planeten
+planet1_plt, = ax.plot(p1x_sol, p1y_sol, p1z_sol, 'green', label='Planet 1', linewidth=1)
+planet2_plt, = ax.plot(p2x_sol, p2y_sol, p2z_sol, 'red', label='Planet 2', linewidth=1)
+planet3_plt, = ax.plot(p3x_sol, p3y_sol, p3z_sol, 'blue',label='Planet 3', linewidth=1)
+
+#für die planeten als punkte um nachzuverfolgen 
+planet1_dot, = ax.plot([p1x_sol[-1]], [p1y_sol[-1]], [p1z_sol[-1]], 'o', color='green', markersize=6)
+planet2_dot, = ax.plot([p2x_sol[-1]], [p2y_sol[-1]], [p2z_sol[-1]], 'o', color='red', markersize=6)
+planet3_dot, = ax.plot([p3x_sol[-1]], [p3y_sol[-1]], [p3z_sol[-1]], 'o', color='blue', markersize=6)
+
+
+ax.set_title("The 3-Body Problem")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("z")
+plt.grid()
+plt.legend()
+
+plt.show()
