@@ -91,4 +91,27 @@ ax.set_zlabel("z")
 plt.grid()
 plt.legend()
 
+
+
+
+#animation
+
+def update(frame):
+
+    x_current = p1x_sol[0:frame+1]
+    y_current = p1y_sol[0:frame+1]
+    z_current = p1z_sol[0:frame+1]
+
+    planet1_plt.set_data(x_current_1, y_current_1)  
+    planet1_plt.set_3d_properties(z_current_1)
+
+    planet1_dot.set_data([x_current_1[-1]], [y_current_1[-1]])
+    planet1_dot.set_3d_properties([z_current_1[-1]])
+
+    return planet1_plt, planet1_dot 
+
+    
+animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=True)
 plt.show()
+
+
