@@ -90,6 +90,7 @@ ax.set_ylabel("y")
 ax.set_zlabel("z")
 plt.grid()
 plt.legend()
+# plt.show()
 
 
 
@@ -98,17 +99,34 @@ plt.legend()
 
 def update(frame):
 
-    x_current = p1x_sol[0:frame+1]
-    y_current = p1y_sol[0:frame+1]
-    z_current = p1z_sol[0:frame+1]
+    x_current_1 = p1x_sol[0:frame+1]
+    y_current_1 = p1y_sol[0:frame+1]
+    z_current_1 = p1z_sol[0:frame+1]
 
-    planet1_plt.set_data(x_current, y_current)  
-    planet1_plt.set_3d_properties(z_current)
+    x_current_2 = p2x_sol[0:frame+1]
+    y_current_2 = p2y_sol[0:frame+1]
+    z_current_2 = p2z_sol[0:frame+1]
 
-    planet1_dot.set_data([x_current[-1]], [y_current[-1]])
-    planet1_dot.set_3d_properties([z_current[-1]])
+    x_current_3 = p3x_sol[0:frame+1]
+    y_current_3 = p3y_sol[0:frame+1]
+    z_current_3 = p3z_sol[0:frame+1]
 
-    return planet1_plt, planet1_dot 
+    planet1_plt.set_data(x_current_1, y_current_1)  
+    planet1_plt.set_3d_properties(z_current_1)
+    planet1_dot.set_data([x_current_1[-1]], [y_current_1[-1]])
+    planet1_dot.set_3d_properties([z_current_1[-1]])
+
+    planet2_plt.set_data(x_current_2, y_current_2)
+    planet2_plt.set_3d_properties(z_current_2)
+    planet2_dot.set_data([x_current_2[-1]], [y_current_2[-1]])
+    planet2_dot.set_3d_properties([z_current_2[-1]])
+
+    planet3_plt.set_data(x_current_3, y_current_3)
+    planet3_plt.set_3d_properties(z_current_3)
+    planet3_dot.set_data([x_current_3[-1]], [y_current_3[-1]])
+    planet3_dot.set_3d_properties([z_current_3[-1]])
+
+    return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot
 
     
 animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=True)
