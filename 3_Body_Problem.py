@@ -52,6 +52,19 @@ solution= solve_ivp(
 
 )
 
+#daten für vektor 
+v1x_sol = solution.y[9]
+v1y_sol = solution.y[10]
+v1z_sol = solution.y[11]
+
+v2x_sol = solution.y[12]
+v2y_sol = solution.y[13]
+v2z_sol = solution.y[14]
+
+v3x_sol = solution.y[15]
+v3y_sol = solution.y[16]
+v3z_sol = solution.y[17]
+
 
 t_sol = solution.t
 #positionen der planeten durch berechnung 
@@ -83,6 +96,13 @@ planet1_dot, = ax.plot([p1x_sol[-1]], [p1y_sol[-1]], [p1z_sol[-1]], 'o', color='
 planet2_dot, = ax.plot([p2x_sol[-1]], [p2y_sol[-1]], [p2z_sol[-1]], 'o', color='red', markersize=6)
 planet3_dot, = ax.plot([p3x_sol[-1]], [p3y_sol[-1]], [p3z_sol[-1]], 'o', color='blue', markersize=6)
 
+#für vektor pfeile
+quiver1 = ax.quiver([], [], [], [], [], [], color='green', length=0.3)
+quiver2 = ax.quiver([], [], [], [], [], [], color='red', length=0.3)
+quiver3 = ax.quiver([], [], [], [], [], [], color='blue', length=0.3)
+
+
+
 
 ax.set_title("The 3-Body Problem")
 ax.set_xlabel("x")
@@ -98,6 +118,11 @@ plt.legend()
 #animation
 
 def update(frame):
+
+    global quiver1, quiver2, quiver3
+    quiver1.remove()
+    quiver2.remove()
+    quiver3.remove()
 
     x_current_1 = p1x_sol[0:frame+1]
     y_current_1 = p1y_sol[0:frame+1]
@@ -126,10 +151,15 @@ def update(frame):
     planet3_dot.set_data([x_current_3[-1]], [y_current_3[-1]])
     planet3_dot.set_3d_properties([z_current_3[-1]])
 
-    return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot
+    #vektoren 
+    quiver1 = ax.quiver(x_current_1[-1], y_current_1[-1], z_current_1[-1], v1x_sol[frame], v1y_sol[frame], v1z_sol[frame], color='green', length=0.3)
+    quiver2 = ax.quiver(x_current_2[-1], y_current_2[-1], z_current_2[-1], v2x_sol[frame], v2y_sol[frame], v2z_sol[frame], color='red', length=0.3)
+    quiver3 = ax.quiver(x_current_3[-1], y_current_3[-1], z_current_3[-1], v3x_sol[frame], v3y_sol[frame], v3z_sol[frame], color='blue', length=0.3)
 
+
+    return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3
     
-animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=True)
+animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)
 plt.show()
 
 
