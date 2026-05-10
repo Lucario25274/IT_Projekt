@@ -8,13 +8,23 @@ import time
 
 m1, m2, m3 = 1.0, 1.0, 1.0
  
-start_postion_1 = [1.0, 0.0, 1.0]
-start_postion_2 = [1.0, 1.0, 0.0]
-start_postion_3 = [0.0, 1.0, 1.0]
+# start_postion_1 = [1.0, 0.5, 0.0]
+# start_postion_2 = [-1.0, 0.5, 0.0]
+# start_postion_3 = [0.0, -1.0, 0.0]
 
-start_geschwindigkeit_1 = [0.0, 0.0, -1.0]
-start_geschwindigkeit_2 = [0.0, 0.0, 1.0]
-start_geschwindigkeit_3 = [0.0, 0.0, -0.6]
+# start_geschwindigkeit_1 = [-0.2, -0.1, 0.2]
+# start_geschwindigkeit_2 = [0.2, -0.2, -0.1]
+# start_geschwindigkeit_3 = [0.1, 0.3, 0.0]
+
+
+start_postion_1 = [-0.97000436, 0.24308753, 0.0]
+start_postion_2 = [0.0, 0.0, 0.0]
+start_postion_3 = [0.97000436, -0.24308753, 0.0]
+
+v_x, v_y = 0.466203685, 0.43236573
+start_geschwindigkeit_1 = [v_x, v_y, 0.0]
+start_geschwindigkeit_2 = [-2*v_x, -2*v_y, 0.0]
+start_geschwindigkeit_3 = [v_x, v_y, 0.0]
 
 # anfangsbedingungen für solve ivp
 anfangsbedingungen = np.array([
@@ -103,62 +113,62 @@ quiver3 = ax.quiver(p3x_sol[-1], p3y_sol[-1], p3z_sol[-1], v3x_sol[-1], v3y_sol[
 
 
 
-ax.set_title("The 3-Body Problem")
+ax.set_title("Das 3-Körper Problem")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
 plt.grid()
 plt.legend()
-plt.show()
+# plt.show()
 
 
 
 
 #animation
 
-# def update(frame):
+def update(frame):
 
-#     global quiver1, quiver2, quiver3
-#     quiver1.remove()
-#     quiver2.remove()
-#     quiver3.remove()
+    global quiver1, quiver2, quiver3
+    quiver1.remove()
+    quiver2.remove()
+    quiver3.remove()
 
-#     x_current_1 = p1x_sol[0:frame+1]
-#     y_current_1 = p1y_sol[0:frame+1]
-#     z_current_1 = p1z_sol[0:frame+1]
+    x_current_1 = p1x_sol[0:frame+1]
+    y_current_1 = p1y_sol[0:frame+1]
+    z_current_1 = p1z_sol[0:frame+1]
 
-#     x_current_2 = p2x_sol[0:frame+1]
-#     y_current_2 = p2y_sol[0:frame+1]
-#     z_current_2 = p2z_sol[0:frame+1]
+    x_current_2 = p2x_sol[0:frame+1]
+    y_current_2 = p2y_sol[0:frame+1]
+    z_current_2 = p2z_sol[0:frame+1]
 
-#     x_current_3 = p3x_sol[0:frame+1]
-#     y_current_3 = p3y_sol[0:frame+1]
-#     z_current_3 = p3z_sol[0:frame+1]
+    x_current_3 = p3x_sol[0:frame+1]
+    y_current_3 = p3y_sol[0:frame+1]
+    z_current_3 = p3z_sol[0:frame+1]
 
-#     planet1_plt.set_data(x_current_1, y_current_1)  
-#     planet1_plt.set_3d_properties(z_current_1)
-#     planet1_dot.set_data([x_current_1[-1]], [y_current_1[-1]])
-#     planet1_dot.set_3d_properties([z_current_1[-1]])
+    planet1_plt.set_data(x_current_1, y_current_1)  
+    planet1_plt.set_3d_properties(z_current_1)
+    planet1_dot.set_data([x_current_1[-1]], [y_current_1[-1]])
+    planet1_dot.set_3d_properties([z_current_1[-1]])
 
-#     planet2_plt.set_data(x_current_2, y_current_2)
-#     planet2_plt.set_3d_properties(z_current_2)
-#     planet2_dot.set_data([x_current_2[-1]], [y_current_2[-1]])
-#     planet2_dot.set_3d_properties([z_current_2[-1]])
+    planet2_plt.set_data(x_current_2, y_current_2)
+    planet2_plt.set_3d_properties(z_current_2)
+    planet2_dot.set_data([x_current_2[-1]], [y_current_2[-1]])
+    planet2_dot.set_3d_properties([z_current_2[-1]])
 
-#     planet3_plt.set_data(x_current_3, y_current_3)
-#     planet3_plt.set_3d_properties(z_current_3)
-#     planet3_dot.set_data([x_current_3[-1]], [y_current_3[-1]])
-#     planet3_dot.set_3d_properties([z_current_3[-1]])
+    planet3_plt.set_data(x_current_3, y_current_3)
+    planet3_plt.set_3d_properties(z_current_3)
+    planet3_dot.set_data([x_current_3[-1]], [y_current_3[-1]])
+    planet3_dot.set_3d_properties([z_current_3[-1]])
 
-#     #vektoren 
-#     quiver1 = ax.quiver(x_current_1[-1], y_current_1[-1], z_current_1[-1], v1x_sol[frame], v1y_sol[frame], v1z_sol[frame], color='green', length=0.3)
-#     quiver2 = ax.quiver(x_current_2[-1], y_current_2[-1], z_current_2[-1], v2x_sol[frame], v2y_sol[frame], v2z_sol[frame], color='red', length=0.3)
-#     quiver3 = ax.quiver(x_current_3[-1], y_current_3[-1], z_current_3[-1], v3x_sol[frame], v3y_sol[frame], v3z_sol[frame], color='blue', length=0.3)
+    #vektoren 
+    quiver1 = ax.quiver(x_current_1[-1], y_current_1[-1], z_current_1[-1], v1x_sol[frame], v1y_sol[frame], v1z_sol[frame], color='green', length=0.3)
+    quiver2 = ax.quiver(x_current_2[-1], y_current_2[-1], z_current_2[-1], v2x_sol[frame], v2y_sol[frame], v2z_sol[frame], color='red', length=0.3)
+    quiver3 = ax.quiver(x_current_3[-1], y_current_3[-1], z_current_3[-1], v3x_sol[frame], v3y_sol[frame], v3z_sol[frame], color='blue', length=0.3)
 
 
-#     return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3
+    return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3
     
-# animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)
-# plt.show()
+animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)
+plt.show()
 
 
