@@ -34,8 +34,7 @@ Das Drei-Körper-Problem besteht darin, den Bahnverlauf dreier Körper unter dem
 
 ### 3.1 Einfaches Modell: Zwei Körper
 
-> [!NOTE]
-> Bild einfügen *
+<img width="1552" height="711" alt="Image (3)" src="https://github.com/user-attachments/assets/838324a3-e390-4a4a-bf91-1053fe964668" />
 
 Die Stärke der Gravitationskraft zwischen zwei Körpern ist laut Newtonschen Gravitationsgesetz proportional zum Produkt der wirkenden Massen und umgekehrt proportional zum Quadrat ihres Abstandes:
 
@@ -60,9 +59,9 @@ $$\vec{r}_{12} := \vec{r}_2 - \vec{r}_1 \qquad \text{mit Betrag } r = |\vec{r}_{
 >
 > Setzt man diesen ein, ergibt sich:
 >
-> $$\vec{F}_1 = G \frac{m_1 m_2}{r^2} \cdot \vec{e}_{12} = G \frac{m_1 m_2}{r^2} \cdot \frac{\vec{r}_{12}}{r} = G \frac{m_1 m_2}{r^3} \cdot \vec{r}_{12}$$
+> $$\vec{F}_1 = \underbrace{G \frac{m_1 m_2}{|\vec{r}_2 - \vec{r}_1|^2}}_{\text{Stärke}} \cdot \underbrace{\frac{(\vec{r}_2 - \vec{r}_1)}{|\vec{r}_2 - \vec{r}_1|}}_{\text{Richtung}} = G \frac{m_1 m_2}{|\vec{r}_2 - \vec{r}_1|^3}(\vec{r}_2 - \vec{r}_1)$$
 >
-> Das $r^3$ entsteht dadurch, dass man das $r^2$ aus dem Gravitationsgesetz mit dem $r$ aus der Normierung des Richtungsvektors kombiniert — mathematisch äquivalent zur Schreibweise mit $\vec{e}_{12}$, aber kompakter, da kein separater Einheitsvektor benötigt wird.
+> Das r³ kommt daher, dass man das r² aus dem Gravitationsgesetz und das r aus dem Richtungsvektor zusammenmultipliziert. Das ergibt dasselbe wie wenn man einen extra Einheitsvektor hinschreibt. Es ist bloß kürzer
 
 ---
 
@@ -95,8 +94,7 @@ $$\boxed{\sum \vec{F}_{ij} = m_i \frac{d^2\vec{x}_i}{dt^2}}$$
 
 ### 3.3 Erweiterung auf drei Körper
 
-> [!NOTE]
-> *BILD*
+<img width="1923" height="914" alt="Image (2)" src="https://github.com/user-attachments/assets/a9c792e4-ee06-41af-8239-5fa0ec1641a9" />
 
 Ein Planet wird als Massenpunkt mit Position $\vec{x} = [x, y, z]$ dargestellt. Wendet man Newtons zweites Gesetz auf jeden Planeten einzeln an, ergibt sich für **Planet 1** ($\vec{x}_1$):
 
@@ -108,11 +106,16 @@ $$\frac{d^2\vec{x}_1}{dt^2} = Gm_3 \frac{\vec{x}_3 - \vec{x}_1}{|\vec{x}_3 - \ve
 
 Wiederholt man dies für alle drei Planeten, erhält man das vollständige Differentialgleichungssystem (ODE-System):
 
-$$\boxed{\begin{aligned}
-\frac{d^2\vec{x}_1}{dt^2} &= Gm_3 \frac{\vec{x}_3 - \vec{x}_1}{|\vec{x}_3 - \vec{x}_1|^3} + Gm_2 \frac{\vec{x}_2 - \vec{x}_1}{|\vec{x}_2 - \vec{x}_1|^3} \\[8pt]
-\frac{d^2\vec{x}_2}{dt^2} &= Gm_3 \frac{\vec{x}_3 - \vec{x}_2}{|\vec{x}_3 - \vec{x}_2|^3} + Gm_1 \frac{\vec{x}_1 - \vec{x}_2}{|\vec{x}_1 - \vec{x}_2|^3} \\[8pt]
-\frac{d^2\vec{x}_3}{dt^2} &= Gm_1 \frac{\vec{x}_1 - \vec{x}_3}{|\vec{x}_1 - \vec{x}_3|^3} + Gm_2 \frac{\vec{x}_2 - \vec{x}_3}{|\vec{x}_2 - \vec{x}_3|^3}
-\end{aligned}}$$
+```math
+\begin{aligned}
+    \frac{d^2\vec{x}_1}{dt^2} &= Gm_3 \frac{\vec{x}_3 - \vec{x}_1}{|\vec{x}_3 - \vec{x}_1|^3}
+                               + Gm_2 \frac{\vec{x}_2 - \vec{x}_1}{|\vec{x}_2 - \vec{x}_1|^3} \\[20pt]
+    \frac{d^2\vec{x}_2}{dt^2} &= Gm_3 \frac{\vec{x}_3 - \vec{x}_2}{|\vec{x}_3 - \vec{x}_2|^3}
+                               + Gm_1 \frac{\vec{x}_1 - \vec{x}_2}{|\vec{x}_1 - \vec{x}_2|^3} \\[20pt]
+    \frac{d^2\vec{x}_3}{dt^2} &= Gm_1 \frac{\vec{x}_1 - \vec{x}_3}{|\vec{x}_1 - \vec{x}_3|^3}
+                               + Gm_2 \frac{\vec{x}_2 - \vec{x}_3}{|\vec{x}_2 - \vec{x}_3|^3}
+\end{aligned}
+```
 
 > [!WARNING]
 > Dieses Gleichungssystem besitzt keine analytische Lösung. Es muss numerisch gelöst werden.
@@ -121,8 +124,8 @@ $$\boxed{\begin{aligned}
 
 ## 4. Skalierung für Python
 
-> [!NOTE]
-> Bild*
+<img width="1608" height="862" alt="Image (1)" src="https://github.com/user-attachments/assets/e44dabfe-76e0-4163-93e5-adf211721a2a" />
+
 
 Um die numerische Berechnung stabiler zu machen, werden alle Größen dimensionslos umskaliert. Dazu definiert man Referenzgrößen $M$ (Masse), $L$ (Länge) und $T$ (Zeit) und drückt alle Variablen relativ zu diesen aus.
 
@@ -150,7 +153,7 @@ $L$ ist die Referenzlänge (z. B. 1 AE = astronomische Einheit).
 
 ### 4.3 Zeit $t'$
 
-Die Referenzzeit $T$ wird so gewählt, dass sie dimensionslos konsistent mit $G$, $M$ und $L$ ist:
+Die Referenzzeit $T$ wird so gewählt, dass sie dimensionslos Logisch mit $G$, $M$ und $L$ ist:
 
 **Herleitung:**
 
@@ -182,7 +185,7 @@ $$\vec{x}\,' = \frac{\vec{x}}{L}, \qquad m' = \frac{m}{M}, \qquad t' = t\sqrt{\f
 
 in die Bewegungsgleichung ein, erhält man zunächst:
 
-$$\frac{d^2(L\vec{x}\,'_1)}{d\!\left(\sqrt{\frac{L^3}{GM}}\,t'\right)^2} = Gm_3 \frac{L(\vec{x}\,'_3 - \vec{x}\,'_1)}{|L(\vec{x}\,'_3 - \vec{x}\,'_1)|^3} + Gm_2 \frac{L(\vec{x}\,'_2 - \vec{x}\,'_1)}{|L(\vec{x}\,'_2 - \vec{x}\,'_1)|^3}$$
+$$\frac{d^2(L\vec{x}\,'_1)}{d\\left(\sqrt{\frac{L^3}{GM}}\,t'\right)^2} = Gm_3 \frac{L(\vec{x}\,'_3 - \vec{x}\,'_1)}{|L(\vec{x}\,'_3 - \vec{x}\,'_1)|^3} + Gm_2 \frac{L(\vec{x}\,'_2 - \vec{x}\,'_1)}{|L(\vec{x}\,'_2 - \vec{x}\,'_1)|^3}$$
 
 Nach dem Vereinfachen und Kürzen ergibt sich die skalierte Bewegungsgleichung:
 
@@ -190,18 +193,23 @@ $$\boxed{\frac{d^2\vec{x}\,'_1}{dt'^2} = m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}
 
 Das vollständige skalierte ODE-System für alle drei Körper lautet:
 
-$$\begin{aligned}
-\frac{d^2\vec{x}\,'_1}{dt'^2} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}{|\vec{x}\,'_3 - \vec{x}\,'_1|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_1}{|\vec{x}\,'_2 - \vec{x}\,'_1|^3} \\[8pt]
-\frac{d^2\vec{x}\,'_2}{dt'^2} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_2}{|\vec{x}\,'_3 - \vec{x}\,'_2|^3} + m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_2}{|\vec{x}\,'_1 - \vec{x}\,'_2|^3} \\[8pt]
-\frac{d^2\vec{x}\,'_3}{dt'^2} &= m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_3}{|\vec{x}\,'_1 - \vec{x}\,'_3|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_3}{|\vec{x}\,'_2 - \vec{x}\,'_3|^3}
-\end{aligned}$$
+```math
+\begin{aligned}
+    \frac{d^2\vec{x}\,'_1}{dt'^2} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}{|\vec{x}\,'_3 - \vec{x}\,'_1|^3}
+                                   + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_1}{|\vec{x}\,'_2 - \vec{x}\,'_1|^3} \\[8pt]
+    \frac{d^2\vec{x}\,'_2}{dt'^2} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_2}{|\vec{x}\,'_3 - \vec{x}\,'_2|^3}
+                                   + m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_2}{|\vec{x}\,'_1 - \vec{x}\,'_2|^3} \\[8pt]
+    \frac{d^2\vec{x}\,'_3}{dt'^2} &= m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_3}{|\vec{x}\,'_1 - \vec{x}\,'_3|^3}
+                                   + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_3}{|\vec{x}\,'_2 - \vec{x}\,'_3|^3}
+\end{aligned}
+```
 
 ---
 
 ### 5.2 Umwandlung in ein System erster Ordnung
 
 > [!IMPORTANT]
-> Ein Computer kann nur Differentialgleichungen erster Ordnung (nur $\frac{d}{dt}$, kein $\frac{d^2}{dt^2}$) direkt lösen. Deshalb führt man Hilfsfunktionen für die Geschwindigkeiten ein.
+> Das Programm kann nur Differentialgleichungen erster Ordnung (nur $\frac{d}{dt}$, kein $\frac{d^2}{dt^2}$) direkt lösen. Deshalb führt man Hilfsfunktionen für die Geschwindigkeiten ein.
 
 Man definiert die Geschwindigkeiten als neue Variablen:
 
@@ -210,7 +218,19 @@ $$\vec{f}_1 = \frac{d\vec{x}\,'_1}{dt'}, \qquad \vec{f}_2 = \frac{d\vec{x}\,'_2}
 Damit erhält man das vollständige System erster Ordnung:
 
 ```math
-\boxed{\begin{aligned} \frac{d\vec{x}\,'_1}{dt'} &= \vec{f}_1 \\[6pt] \frac{d\vec{x}\,'_2}{dt'} &= \vec{f}_2 \\[6pt] \frac{d\vec{x}\,'_3}{dt'} &= \vec{f}_3 \\[10pt] \frac{d\vec{f}_1}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}{|\vec{x}\,'_3 - \vec{x}\,'_1|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_1}{|\vec{x}\,'_2 - \vec{x}\,'_1|^3} \\[6pt] \frac{d\vec{f}_2}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_2}{|\vec{x}\,'_3 - \vec{x}\,'_2|^3} + m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_2}{|\vec{x}\,'_1 - \vec{x}\,'_2|^3} \\[6pt] \frac{d\vec{f}_3}{dt'} &= m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_3}{|\vec{x}\,'_1 - \vec{x}\,'_3|^3} + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_3}{|\vec{x}\,'_2 - \vec{x}\,'_3|^3} \end{aligned}}
+\boxed{
+\begin{aligned}
+    \frac{d\vec{x}\,'_1}{dt'} &= \vec{f}_1 \\[6pt]
+    \frac{d\vec{x}\,'_2}{dt'} &= \vec{f}_2 \\[6pt]
+    \frac{d\vec{x}\,'_3}{dt'} &= \vec{f}_3 \\[10pt]
+    \frac{d\vec{f}_1}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_1}{|\vec{x}\,'_3 - \vec{x}\,'_1|^3}
+                            + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_1}{|\vec{x}\,'_2 - \vec{x}\,'_1|^3} \\[6pt]
+    \frac{d\vec{f}_2}{dt'} &= m'_3 \frac{\vec{x}\,'_3 - \vec{x}\,'_2}{|\vec{x}\,'_3 - \vec{x}\,'_2|^3}
+                            + m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_2}{|\vec{x}\,'_1 - \vec{x}\,'_2|^3} \\[6pt]
+    \frac{d\vec{f}_3}{dt'} &= m'_1 \frac{\vec{x}\,'_1 - \vec{x}\,'_3}{|\vec{x}\,'_1 - \vec{x}\,'_3|^3}
+                            + m'_2 \frac{\vec{x}\,'_2 - \vec{x}\,'_3}{|\vec{x}\,'_2 - \vec{x}\,'_3|^3}
+\end{aligned}
+}
 ```
 
 ---
@@ -219,13 +239,13 @@ Damit erhält man das vollständige System erster Ordnung:
 
 Gesucht sind die Punkte $\vec{x}\,'_1(t')$, $\vec{x}\,'_2(t')$ und $\vec{x}\,'_3(t')$. Zum Zeitpunkt $t' = 0$ müssen folgende Anfangswerte bekannt sein:
 
-| Größe | Bedeutung |
-|---|---|
-| $\vec{x}\,'_{i,0} = [x'_0,\, y'_0,\, z'_0]$ | Anfangsposition von Körper $i$ |
-| $\vec{v}\,'_{i,0} = [v'_{x_0},\, v'_{y_0},\, v'_{z_0}]$ | Anfangsgeschwindigkeit von Körper $i$ |
+$$
+\begin{aligned}
+\vec{x}\,'_{i,0} &= [x'_0,\, y'_0,\, z'_0] && \text{Anfangsposition von Körper } i \\
+\vec{v}\,'_{i,0} &= [v'_{x_0},\, v'_{y_0},\, v'_{z_0}] && \text{Anfangsgeschwindigkeit von Körper } i
+\end{aligned}
+$$
 
 für $i = 1, 2, 3$. (Körper)
-
 ---
 
-FERTIGGGGGGGGG!121!
