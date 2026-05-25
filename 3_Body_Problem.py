@@ -7,25 +7,15 @@ import time
 
 # anfangsbedingungen und konstanten 
 
-m1, m2, m3 = 1.0, 1.0, 1.0
+m1, m2, m3 = 1.0, 2.0, 1.5
  
-# start_postion_1 = [1.0, 0.5, 0.0]
-# start_postion_2 = [-1.0, 0.5, 0.0]
-# start_postion_3 = [0.0, -1.0, 0.0]
+start_postion_1 = [ 1.0,  0.0,  0.5]
+start_postion_2 = [-1.0,  0.0, -0.5]
+start_postion_3 = [ 0.0,  1.5,  0.0]
 
-# start_geschwindigkeit_1 = [-0.2, -0.1, 0.2]
-# start_geschwindigkeit_2 = [0.2, -0.2, -0.1]
-# start_geschwindigkeit_3 = [0.1, 0.3, 0.0]
-
-
-start_postion_1 = [-0.97000436, 0.24308753, 0.0]
-start_postion_2 = [0.0, 0.5, 0.0]
-start_postion_3 = [0.97000436, -0.24308753, 0.0]
-
-v_x, v_y = 0.466203685, 0.43236573
-start_geschwindigkeit_1 = [v_x, v_y, 0.0]
-start_geschwindigkeit_2 = [-2*v_x, -2*v_y, 0.0]
-start_geschwindigkeit_3 = [v_x, v_y, 0.0]
+start_geschwindigkeit_1 = [ 0.2,  0.5, -0.3]
+start_geschwindigkeit_2 = [-0.2, -0.5,  0.3]
+start_geschwindigkeit_3 = [ 0.1,  0.0,  0.2]
 
 # anfangsbedingungen für solve ivp
 anfangsbedingungen = np.array([
