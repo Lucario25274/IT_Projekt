@@ -127,18 +127,52 @@ ax.set_zlabel("z")
 plt.grid()
 plt.legend()
 
-#pause button
-ax_button = fig.add_axes([0.45, 0.02, 0.1, 0.05])  #links, unten, breite, höhe
-btn_pause = Button(ax_button, 'Pause')
+#textdarstellung für anzeige der abstände und geschwindigkeiten in der animation
+info_text = ax.text2D(
+    0.01, 0.97, "",
+    transform=fig.transFigure,
+    fontsize=8,
+    verticalalignment='top',
+    fontfamily='monospace',
+    bbox=dict(boxstyle='round', facecolor='black', alpha=0.5),
+    color='white'
+)
+
+#startwerte für standbild 
+r12_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_2))
+r13_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_3))
+r23_0 = np.linalg.norm(np.array(start_postion_2) - np.array(start_postion_3))
+
+geschwindigkeit1_0 = np.linalg.norm(start_geschwindigkeit_1)
+geschwindigkeit2_0 = np.linalg.norm(start_geschwindigkeit_2)
+geschwindigkeit3_0 = np.linalg.norm(start_geschwindigkeit_3)
+
+info_text.set_text(
+    f"Abstände:\n"
+    f"  r₁₂ = {r12_0 * L / 1.496e11:.3f} AU\n"
+    f"  r₁₃ = {r13_0 * L / 1.496e11:.3f} AU\n"
+    f"  r₂₃ = {r23_0 * L / 1.496e11:.3f} AU\n"
+    f"\nGeschwindigkeiten:\n"
+    f"  |v₁| = {geschwindigkeit1_0 * V / 1000:.2f} km/s\n"
+    f"  |v₂| = {geschwindigkeit2_0 * V / 1000:.2f} km/s\n"
+    f"  |v₃| = {geschwindigkeit3_0 * V / 1000:.2f} km/s"
+)
+
 # plt.show()
+
+
+
 
 
 
 
 #animation
 
-#dafür da um Animation zu stoppen und  starten und varuiablen zu speichern
+#pause button
+ax_button = fig.add_axes([0.45, 0.02, 0.1, 0.05])  #links, unten, breite, höhe
+btn_pause = Button(ax_button, 'Pause')
 
+#dafür da um Animation zu stoppen und  starten und varuiablen zu speichern
 laeuft = [True]  # Liste, damit sie in toggle_pause geändert werden kann
 
 def toggle_pause(event):  
@@ -188,6 +222,29 @@ def update(frame):
     quiver1 = ax.quiver(x_current_1[-1], y_current_1[-1], z_current_1[-1], v1x_sol[frame], v1y_sol[frame], v1z_sol[frame], color='green', length=0.3)
     quiver2 = ax.quiver(x_current_2[-1], y_current_2[-1], z_current_2[-1], v2x_sol[frame], v2y_sol[frame], v2z_sol[frame], color='red', length=0.3)
     quiver3 = ax.quiver(x_current_3[-1], y_current_3[-1], z_current_3[-1], v3x_sol[frame], v3y_sol[frame], v3z_sol[frame], color='blue', length=0.3)
+
+    # abstände und geschwindigkeiten berechnen und rückskalieren
+    r12 = np.linalg.norm(np.array([x_current_1[-1], y_current_1[-1], z_current_1[-1]]) -
+                         np.array([x_current_2[-1], y_current_2[-1], z_current_2[-1]]))
+    r13 = np.linalg.norm(np.array([x_current_1[-1], y_current_1[-1], z_current_1[-1]]) -
+                         np.array([x_current_3[-1], y_current_3[-1], z_current_3[-1]]))
+    r23 = np.linalg.norm(np.array([x_current_2[-1], y_current_2[-1], z_current_2[-1]]) -
+                         np.array([x_current_3[-1], y_current_3[-1], z_current_3[-1]]))
+
+    geschwindigkeit1 = np.linalg.norm([v1x_sol[frame], v1y_sol[frame], v1z_sol[frame]])
+    geschwindigkeit2 = np.linalg.norm([v2x_sol[frame], v2y_sol[frame], v2z_sol[frame]])
+    geschwindigkeit3 = np.linalg.norm([v3x_sol[frame], v3y_sol[frame], v3z_sol[frame]])
+
+    info_text.set_text(
+        f"Abstände:\n"
+        f"  r₁₂ = {r12 * L / 1.496e11:.3f} AU\n"
+        f"  r₁₃ = {r13 * L / 1.496e11:.3f} AU\n"
+        f"  r₂₃ = {r23 * L / 1.496e11:.3f} AU\n"
+        f"\nGeschwindigkeiten:\n"
+        f"  |v₁| = {geschwindigkeit1 * V / 1000:.2f} km/s\n"
+        f"  |v₂| = {geschwindigkeit2 * V / 1000:.2f} km/s\n"
+        f"  |v₃| = {geschwindigkeit3 * V / 1000:.2f} km/s"
+    )
 
 
     return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3
