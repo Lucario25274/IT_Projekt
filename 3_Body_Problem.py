@@ -55,11 +55,13 @@ def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind masse
 
 
 
-
+#zeitspanne
 time_start , time_end = 0, 10
+# zeitpunkte für auswertung 
 t_points = np.linspace(time_start, time_end, 2001) 
 
 t1 =time.time()
+#numerische lösung
 solution= solve_ivp(
     fun=system_odes,                    #die funktion die die differenzialgleichungen definiert
     t_span=(time_start, time_end),      #zeitspanne für die integration
@@ -83,7 +85,6 @@ v3y_sol = solution.y[16]
 v3z_sol = solution.y[17]
 
 
-t_sol = solution.t
 #positionen der planeten durch berechnung 
 p1x_sol = solution.y[0]
 p1y_sol = solution.y[1]
@@ -98,7 +99,8 @@ p3y_sol = solution.y[7]
 p3z_sol = solution.y[8]
 # print(p1x_sol)
 
-solution.y.shape
+
+
 
 # für bildung von 3D grafik
 fig, ax = plt.subplots(subplot_kw={"projection":"3d"})
@@ -147,11 +149,12 @@ geschwindigkeit1_0 = np.linalg.norm(start_geschwindigkeit_1)
 geschwindigkeit2_0 = np.linalg.norm(start_geschwindigkeit_2)
 geschwindigkeit3_0 = np.linalg.norm(start_geschwindigkeit_3)
 
+# text für die infobox zusammenbauen und werte mit hilfe der referenzgrößen zurückskalieren und in AE und km/s umrechen 
 info_text.set_text(
     f"Abstände:\n"
-    f"  r₁₂ = {r12_0 * L / 1.496e11:.3f} AU\n"
-    f"  r₁₃ = {r13_0 * L / 1.496e11:.3f} AU\n"
-    f"  r₂₃ = {r23_0 * L / 1.496e11:.3f} AU\n"
+    f"  r₁₂ = {r12_0 * L / 1.496e11:.3f} AE\n"
+    f"  r₁₃ = {r13_0 * L / 1.496e11:.3f} AE\n"
+    f"  r₂₃ = {r23_0 * L / 1.496e11:.3f} AE\n"
     f"\nGeschwindigkeiten:\n"
     f"  |v₁| = {geschwindigkeit1_0 * V / 1000:.2f} km/s\n"
     f"  |v₂| = {geschwindigkeit2_0 * V / 1000:.2f} km/s\n"
@@ -159,9 +162,6 @@ info_text.set_text(
 )
 
 # plt.show()
-
-
-
 
 
 
@@ -175,6 +175,7 @@ btn_pause = Button(ax_button, 'Pause')
 #dafür da um Animation zu stoppen und  starten und varuiablen zu speichern
 laeuft = [True]  # Liste, damit sie in toggle_pause geändert werden kann
 
+# funktion steuert das pausieren und fortsetzen per button-klick
 def toggle_pause(event):  
     if laeuft[0]:
         animation.pause()
@@ -235,6 +236,7 @@ def update(frame):
     geschwindigkeit2 = np.linalg.norm([v2x_sol[frame], v2y_sol[frame], v2z_sol[frame]])
     geschwindigkeit3 = np.linalg.norm([v3x_sol[frame], v3y_sol[frame], v3z_sol[frame]])
 
+    # infobox-text zur laufzeit mit den skalierten echtzeitwerten updaten
     info_text.set_text(
         f"Abstände:\n"
         f"  r₁₂ = {r12 * L / 1.496e11:.3f} AU\n"
