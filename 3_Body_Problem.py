@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from matplotlib.animation import FuncAnimation
+from matplotlib.widgets import Button
 import time
 
 # anfangsbedingungen und konstanten 
@@ -122,12 +123,29 @@ ax.set_ylabel("y")
 ax.set_zlabel("z")
 plt.grid()
 plt.legend()
+
+#pause button
+ax_button = fig.add_axes([0.45, 0.02, 0.1, 0.05])  #links, unten, breite, höhe
+btn_pause = Button(ax_button, 'Pause')
 # plt.show()
 
 
 
 
 #animation
+
+#dafür da um Animation zu stoppen und  starten und varuiablen zu speichern
+
+laeuft = [True]  # Liste, damit sie in toggle_pause geändert werden kann
+
+def toggle_pause(event):  
+    if laeuft[0]:
+        animation.pause()
+        btn_pause.label.set_text('Play')
+    else:
+        animation.resume()
+        btn_pause.label.set_text('Pause')
+    laeuft[0] = not laeuft[0]
 
 def update(frame):
 
@@ -172,6 +190,7 @@ def update(frame):
     return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3
     
 animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)
+btn_pause.on_clicked(toggle_pause)
 plt.show()
 
 
