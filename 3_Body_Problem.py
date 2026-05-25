@@ -5,8 +5,20 @@ from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button
 import time
 
-# anfangsbedingungen und konstanten 
 
+
+#referenzgrößen aus  skalierung ->für berechnung der der realten werte 
+G = 6.674e-11            # gravitationskonstante in m^3/kg·s^2
+M = 1.989e30             # sonnenmasse in kg 
+# M = 5.972e24             # erdmasse in kg
+L = 1.496e11             # referenzlänge = 1 AE in m 
+T = np.sqrt(L**3 / (M * G))   # referenzzeit in s
+V = L / T                # referenzgeschwindigkeit in m/s
+
+
+
+
+# anfangsbedingungen  
 m1, m2, m3 = 1.0, 2.0, 1.5
  
 start_postion_1 = [ 1.0,  0.0,  0.5]
@@ -22,6 +34,7 @@ anfangsbedingungen = np.array([
     start_postion_1, start_postion_2, start_postion_3,
     start_geschwindigkeit_1, start_geschwindigkeit_2, start_geschwindigkeit_3
 ]).ravel()     #macht aus  2D array eine 1D array, damit solve ivp klappt
+
 
 
 
