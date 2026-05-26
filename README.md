@@ -11,6 +11,7 @@
 3. [Mathematische Aspekte](#3-mathematische-aspekte)
 4. [Skalierung für Python](#4-skalierung-für-python)
 5. [Umskalierung der Gleichungen](#5-umskalierung-der-gleichungen)
+6. [Rückskalierung: Reale Abstände und Geschwindigkeiten](#6-rückskalierung-reale-abstände-und-geschwindigkeiten)
 
 ---
 
@@ -137,7 +138,7 @@ $$\boxed{m' = \frac{m}{M}}$$
 
 $M$ ist die Referenzmasse.
 
-**Beispiel:** Wählt man $M = m_\oplus = 5{,}972 \times 10^{24}\,\text{kg}$ (Erdmasse), so gilt:
+Beispiel: Wählt man $M = m_e = 5{,}972 \times 10^{24}\,\text{kg}$ (Erdmasse), dann gilt:
 
 $$m'_e = \frac{m_e}{M} = 1 \qquad m'_s = \frac{m_s}{M} \approx 330\,000$$
 
@@ -209,7 +210,7 @@ Das vollständige skalierte ODE-System für alle drei Körper lautet:
 ### 5.2 Umwandlung in ein System erster Ordnung
 
 > [!IMPORTANT]
-> Das Programm kann nur Differentialgleichungen erster Ordnung (nur $\frac{d}{dt}$, kein $\frac{d^2}{dt^2}$) direkt lösen. Deshalb führt man Hilfsfunktionen für die Geschwindigkeiten ein.
+> Das Programm kann nur Differentialgleichungen erster Ordnung (nur $\frac{d}{dt}$, kein $\frac{d^2}{dt^2}$) direkt lösen. Deshalb führt man eine Hilfsfunktionen für die Geschwindigkeiten ein.
 
 Man definiert die Geschwindigkeiten als neue Variablen:
 
@@ -247,5 +248,65 @@ $$
 $$
 
 für $i = 1, 2, 3$. (Körper)
+
 ---
+
+
+
+## 6. Rückskalierung: Reale Abstände und Geschwindigkeiten
+
+Die Simulation berechnet alle Größen dimensionslos. Um Werte zu bekommen, welche auch mit der Realität übereinstimmen,müssen die Ergebnisse mit den Referenzgrößen zurückskaliert werden.
+
+---
+
+### 6.1 Rückskalierung der Abstände
+
+Der dimensionslose Abstand $r'$ wird mit der Referenzlänge $L$ multipliziert:
+
+$$r = r' \cdot L$$
+
+Für eine bessere Lesbarkeit wird der Abstand anschließend in astronomische Einheiten umgerechnet:
+
+$$r_{\text{AE}} = \frac{r' \cdot L}{1\,\text{AE}} = \frac{r' \cdot L}{1{,}496 \times 10^{11}\,\text{m}}$$
+
+Beispiel: Ein dimensionsloser Abstand von $r' = 2{,}0$ entspricht:
+
+$$r = 2{,}0 \cdot 1{,}496 \times 10^{11}\,\text{m} = 2{,}0\,\text{AE} \approx 300\,\text{Mio. km}$$
+
+---
+
+### 6.2 Referenzgeschwindigkeit $V$
+
+Was Neu dazu gekommen ist, ist die Geschwindigkeit der Planeten die wir im Programm nummerisch gelöst haben 
+Die Referenzgeschwindigkeit ergibt sich direkt aus den bereits definierten Referenzgrößen $L$ und $T$. Diese brauchen wir um die wahre Geschwindigkeit zu berechnen:
+
+$$\boxed{V = \frac{L}{T} = \frac{L}{\sqrt{\dfrac{L^3}{M \cdot G}}} = \sqrt{\frac{M \cdot G}{L}}}$$
+
+Mit den gewählten Referenzwerten ($M = M_s$, $L = 1\,\text{AE}$):
+
+$$V = \sqrt{\frac{1{,}989 \times 10^{30} \cdot 6{,}674 \times 10^{-11}}{1{,}496 \times 10^{11}}} \approx 29{,}8\,\frac{\text{km}}{\text{s}}$$
+
+---
+
+### 6.3 Rückskalierung der Geschwindigkeiten
+
+Nun können wir die Reale Geschwindigkeit berechnen
+Die dimensionslose Geschwindigkeit $v'$ wird mit der Referenzgeschwindigkeit $V$ multipliziert:
+
+$$v = v' \cdot V = v' \cdot \frac{L}{T}$$
+
+Für eine bessere Lesbarkeit wird die Geschwindigkeit in km/s umgerechnet:
+
+$$v_{\text{km/s}} = \frac{v' \cdot V}{1000}$$
+
+> [!TIP]
+> **Warum km/s und nicht km/h?**
+>
+> In der Astronomie ist km/s die übliche Einheit für Planetengeschwindigkeiten.
+> Zum Beispiel umkreist die Erde die Sonne mit $\approx 29{,}8\,\text{km/s}$,
+> was  umgerechnet $\approx 107{.}000\,\text{km/h}$ sind. Deshalb ist auf dauer km/s sinvoller 
+
+---
+
+
 
