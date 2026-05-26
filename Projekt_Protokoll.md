@@ -165,3 +165,37 @@
     - **Lösung:** Verwendung von Code-Blöcken mit ` ```math ` anstatt mit Dolarsymbolen, um die Formeln korrekt zu formatieren.
 
 --- 
+
+# 12.05.26
+
+- **Programmteile:**
+    - Umbenennung der Positionsvariablen von `p` zu `x` im gesamten Code.
+
+- **Problem & Lösung:**
+    - **Problem:** Die Positionsvariable war als `p` angegeben, was mehrdeutig ist,
+      da `p` in der Physik auch für Impuls oder Druck steht.
+    - **Lösung:** Umbenennung  der Positionzu `x`, was auch mit dem Konzeptblatt übereinstimmt.
+
+---
+# 25.05.26
+
+- **Programmteile:**
+    - Erweiterung des Programms mit einem Pause/Play-Button für die Animation.
+    - Hinzufügung einer Live-Textanzeige mit den realen Werten (Abstände in AE,
+      Geschwindigkeiten in km/s) aus der Rückskalierung – sowohl im Standbild
+      als auch während der Animation.
+    - Code sauber gemacht und weiter mit Kommentaren gefüllt.
+
+- **Probleme & Lösungen:**
+    - **Problem:** Für die Rückskalierung der dimensionslosen Geschwindigkeit auf
+      km/s wird die Referenzgeschwindigkeit $V = \frac{L}{T}$ benötigt, die im
+      Code bisher nicht definiert war.
+    - **Lösung:** Ergänzung der physikalischen Referenzgrößen $T$ und $V$ als
+      Konstanten im Code. Für die Darstellung der Werte im Standbild
+      und in der Animation wurden Online-Recherche sowie KI-Unterstützung genutzt.
+
+---
+# 26.05.26 - 
+**Programmteile:** - Konzeptblatt aktualisiert: Abschnitt zur Rückskalierung der realen Abstände und Geschwindigkeiten hinzugefügt. - Projektprotokoll auf aktuellen Stand gebracht. 
+
+---
