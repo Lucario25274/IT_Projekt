@@ -139,10 +139,7 @@ info_text = ax.text2D(
     color='white'
 )
 
-
-
 # berechnung für anzeige der realwerte fürs Standbild 
-
 #Endwerte 
 r12_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_2))
 r13_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_3))
