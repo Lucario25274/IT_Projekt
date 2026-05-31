@@ -1,4 +1,4 @@
-# 27.02.26
+# 27.2.26
 
 - **Physikalische Grundlagen:**
     
@@ -13,7 +13,7 @@
         
     - **Lösung:** Um die Richtung der Kraft korrekt darzustellen, nutzt man den Differenzvektor. Da dieser aber selbst die Länge $r$ hat, würde er den Betrag der Kraft verfälschen. Man muss ihn durch seine eigene Länge teilen, um einen Einheitsvektor zu erhalten. Mathematisch wird das $r$ aus der Normierung mit dem $r^2$ aus dem Gesetz zu $r^3$ kombiniert.
 ---
-# 06.03.26
+# 6.3.26
 
 - **Physikalische Grundlagen:**
     
@@ -36,7 +36,7 @@
     - **Lösung:** Das Problem muss numerisch gelöst werden, was bedeutet, dass der Computer die Positionen in winzigen Zeitschritten immer wieder neu berechnet.
         
 ---
-# 13.03.26
+# 13.3.26
 
 - **Physikalische Grundlagen:**
     
@@ -58,7 +58,7 @@
         
     - **Lösung:** Schrittweise Herleitung mithilfe von Online-Recherche und KI-Unterstützung, um sicherzustellen, dass die Einheitenprobe $[\frac{t}{T}] = 1$ ergibt.
 ---
-# 20.03.26
+# 20.3.26
 
 - **Physikalische Grundlagen:**
     
@@ -78,7 +78,7 @@
         
     - **Lösung:** Durch die Aufsplittung jeder Bewegungsgleichung in zwei Teilschritte ($\frac{d\vec{x}}{dt} = \vec{f}$ und $\frac{d\vec{f}}{dt} = \vec{a}$) wurde das Problem für den Computer lösbar gemacht.
 ---
-# 21.03.26
+# 21.3.26
 
 - **Physikalische Grundlagen:** 
 	- Erstellung eines detaillierten Physik-Konzeptblatts, um die theoretischen Herleitungen (Gravitationsgesetz, ODE-System, Skalierung) ordentlich zu strukturieren und für die Dokumentation festzuhalten.
@@ -87,12 +87,12 @@
 	- Strukturierung der mathematischen Logik als Vorbereitung für die Implementierung in Python.
     
 ---
-# 27.03.26 & 17.04.26
+# 27.3.26 & 17.4.26
 
 - Keine Fortschritte im IT-Unterricht weil ich Krank war und mich vor und nach der Zeit aufs Abi vorbereit habe.
     
 ---
-# 28.04.26
+# 28.4.26
 
 - **Programmteile:** 
 	- Einrichtung eines Repositories auf GitHub.
@@ -100,7 +100,7 @@
     - Dokumentation des Physik-Konzeptblatts im Repository zur Versionskontrolle.
         
 ---
-# 07.05.26
+# 7.5.26
 
 - **Programmteile:**
     
@@ -124,7 +124,7 @@
     - https://www.youtube.com/watch?v=rfQZGhT6bfQ
         
 ---
-# 08.05.26
+# 8.5.26
 
 - **Programmteile:**
     
@@ -136,7 +136,7 @@
 	- 3D-Visualisierung in Matplotlib wurde durch  YouTube-Tutorial  gelöst.
 	
 ---
-# 10.05.26
+# 10.5.26
 
 - **Programmteile:**
     
@@ -152,7 +152,7 @@
 	- Animation mit YouTube beigebracht https://www.youtube.com/watch?v=nT16-yQrnFk
 	- Vektoren müssen ständig aktualisiert werden und somit nach jeden Frame gelöscht und erstellt werden 
 ---
-# 11.05.26
+# 11.5.26
 
 - **Programmteile:** 
 	- Reparatur des Physik-Konzeptblatts und Hinzufügung von Bildern.
@@ -166,7 +166,7 @@
 
 --- 
 
-# 12.05.26
+# 12.5.26
 
 - **Programmteile:**
     - Umbenennung der Positionsvariablen von `p` zu `x` im gesamten Code.
@@ -177,7 +177,7 @@
     - **Lösung:** Umbenennung  der Positionzu `x`, was auch mit dem Konzeptblatt übereinstimmt.
 
 ---
-# 25.05.26
+# 25.5.26
 
 - **Programmteile:**
     - Erweiterung des Programms mit einem Pause/Play-Button für die Animation.
@@ -195,7 +195,14 @@
       und in der Animation wurden Online-Recherche sowie KI-Unterstützung genutzt.
 
 ---
-# 26.05.26 - 
-**Programmteile:** - Konzeptblatt aktualisiert: Abschnitt zur Rückskalierung der realen Abstände und Geschwindigkeiten hinzugefügt. - Projektprotokoll auf aktuellen Stand gebracht. 
+# 26.5.26 - 
+- **Programmteile:** 
+	- Konzeptblatt aktualisiert: Abschnitt zur Rückskalierung der realen Abstände und Geschwindigkeiten hinzugefügt.
+	- Projektprotokoll auf aktuellen Stand gebracht. 
 
 ---
+#1.6.26
+- **Programmteile:**
+	- Kommentare am code geändert und weitere hinzugefügt.
+ 	- Optische Darstellung des Codes versucht zu verbessern.
+	- Aktuallieserung des Projektprotokolls.
