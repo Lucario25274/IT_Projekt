@@ -37,8 +37,7 @@ anfangsbedingungen = np.array([
 
 
 
-
-def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind massen der planeten für berechnung der beschleunigung
+def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind massen der planeten 
 
     #herauslesen von position und geschwindigkeit da ergebniss von solve ivp ein einzelnes array ist 
     x1, x2, x3 = S[0:3], S[3:6], S[6:9] 
@@ -59,16 +58,15 @@ def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind masse
 time_start , time_end = 0, 10
 # zeitpunkte für auswertung 
 t_points = np.linspace(time_start, time_end, 2001) 
-
 t1 =time.time()
+
 #numerische lösung
 solution= solve_ivp(
     fun=system_odes,                    #die funktion die die differenzialgleichungen definiert
     t_span=(time_start, time_end),      #zeitspanne für die integration
     y0=anfangsbedingungen,              #anfangsbedingungen für die integration
-    t_eval=t_points,                #zeitpunktewo Lösung ausgewertet wird oll
+    t_eval=t_points,                #zeitpunkte wo Lösung ausgewertet wird soll
     args=(m1, m2, m3)           #zusätzliche argumente für system_odes funktion sodass sie in der funktion verwendet werden können
-
 )
 
 #daten für vektor 
@@ -102,7 +100,8 @@ p3z_sol = solution.y[8]
 
 
 
-# für bildung von 3D grafik
+#Erstellung 3d grafik
+
 fig, ax = plt.subplots(subplot_kw={"projection":"3d"})
 
  #für die bahnen der planeten
@@ -121,7 +120,7 @@ quiver2 = ax.quiver(p2x_sol[-1], p2y_sol[-1], p2z_sol[-1], v2x_sol[-1], v2y_sol[
 quiver3 = ax.quiver(p3x_sol[-1], p3y_sol[-1], p3z_sol[-1], v3x_sol[-1], v3y_sol[-1], v3z_sol[-1], color='blue', length=0.3)
 
 
-
+#einstellungen für grafik
 ax.set_title("Das 3-Körper Problem")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
@@ -129,18 +128,22 @@ ax.set_zlabel("z")
 plt.grid()
 plt.legend()
 
-#textdarstellung für anzeige der abstände und geschwindigkeiten in der animation
+#textdarstellung für anzeige der echten abstände und geschwindigkeiten in grafik
 info_text = ax.text2D(
-    0.01, 0.97, "",
+    0.01, 0.97, "", #länge, höhe
     transform=fig.transFigure,
     fontsize=8,
     verticalalignment='top',
     fontfamily='monospace',
-    bbox=dict(boxstyle='round', facecolor='black', alpha=0.5),
+    bbox=dict(boxstyle='round', facecolor='black', alpha=0.5), 
     color='white'
 )
 
-#startwerte für standbild 
+
+
+# berechnung für anzeige der realwerte fürs Standbild 
+
+#Endwerte 
 r12_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_2))
 r13_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_3))
 r23_0 = np.linalg.norm(np.array(start_postion_2) - np.array(start_postion_3))
@@ -149,7 +152,7 @@ geschwindigkeit1_0 = np.linalg.norm(start_geschwindigkeit_1)
 geschwindigkeit2_0 = np.linalg.norm(start_geschwindigkeit_2)
 geschwindigkeit3_0 = np.linalg.norm(start_geschwindigkeit_3)
 
-# text für die infobox zusammenbauen und werte mit hilfe der referenzgrößen zurückskalieren und in AE und km/s umrechen 
+#werte mit hilfe der referenzgrößen zurückskalieren und in AE und km/s umrechen und anziegen
 info_text.set_text(
     f"Abstände:\n"
     f"  r₁₂ = {r12_0 * L / 1.496e11:.3f} AE\n"
@@ -160,22 +163,24 @@ info_text.set_text(
     f"  |v₂| = {geschwindigkeit2_0 * V / 1000:.2f} km/s\n"
     f"  |v₃| = {geschwindigkeit3_0 * V / 1000:.2f} km/s"
 )
-
 # plt.show()
+
+
 
 
 
 
 #animation
 
+
 #pause button
-ax_button = fig.add_axes([0.45, 0.02, 0.1, 0.05])  #links, unten, breite, höhe
+ax_button = fig.add_axes([0.45, 0.02, 0.1, 0.05])  #links, unten, breite, oben
 btn_pause = Button(ax_button, 'Pause')
 
 #dafür da um Animation zu stoppen und  starten und varuiablen zu speichern
-laeuft = [True]  # Liste, damit sie in toggle_pause geändert werden kann
+laeuft = [True]
 
-# funktion steuert das pausieren und fortsetzen per button-klick
+#buttonfunktion 
 def toggle_pause(event):  
     if laeuft[0]:
         animation.pause()
@@ -185,13 +190,16 @@ def toggle_pause(event):
         btn_pause.label.set_text('Pause')
     laeuft[0] = not laeuft[0]
 
+
+#funktion die für jeden frame der animation aufgerufen wird um die planetenpositionen vektorpfeile und infobox zu aktualisieren
 def update(frame):
 
-    global quiver1, quiver2, quiver3
+    global quiver1, quiver2, quiver3 #Vektor muss jedes mal neu erstellt werden weil richtung und länge sich immer ändert
     quiver1.remove()
     quiver2.remove()
     quiver3.remove()
 
+# aktuelle positionen und geschwindigkeiten der planeten für den aktuellen frame aus den lösungsarrays holen
     x_current_1 = p1x_sol[0:frame+1]
     y_current_1 = p1y_sol[0:frame+1]
     z_current_1 = p1z_sol[0:frame+1]
@@ -204,6 +212,7 @@ def update(frame):
     y_current_3 = p3y_sol[0:frame+1]
     z_current_3 = p3z_sol[0:frame+1]
 
+# aktualisieren der planetenbahnen, planetenpunkte und vektor pfeile für die animation
     planet1_plt.set_data(x_current_1, y_current_1)  
     planet1_plt.set_3d_properties(z_current_1)
     planet1_dot.set_data([x_current_1[-1]], [y_current_1[-1]])
@@ -219,10 +228,14 @@ def update(frame):
     planet3_dot.set_data([x_current_3[-1]], [y_current_3[-1]])
     planet3_dot.set_3d_properties([z_current_3[-1]])
 
-    #vektoren 
+    #für Vektorerstelllung und stänige neu erstellung 
     quiver1 = ax.quiver(x_current_1[-1], y_current_1[-1], z_current_1[-1], v1x_sol[frame], v1y_sol[frame], v1z_sol[frame], color='green', length=0.3)
     quiver2 = ax.quiver(x_current_2[-1], y_current_2[-1], z_current_2[-1], v2x_sol[frame], v2y_sol[frame], v2z_sol[frame], color='red', length=0.3)
     quiver3 = ax.quiver(x_current_3[-1], y_current_3[-1], z_current_3[-1], v3x_sol[frame], v3y_sol[frame], v3z_sol[frame], color='blue', length=0.3)
+
+
+
+# berechnung für anzeige der Realwerte 
 
     # abstände und geschwindigkeiten berechnen und rückskalieren
     r12 = np.linalg.norm(np.array([x_current_1[-1], y_current_1[-1], z_current_1[-1]]) -
@@ -249,10 +262,10 @@ def update(frame):
     )
 
 
-    return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3
+    return planet1_plt, planet1_dot, planet2_plt, planet2_dot, planet3_plt, planet3_dot, quiver1, quiver2, quiver3 #für aktualisierung der grafik
     
-animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)
-btn_pause.on_clicked(toggle_pause)
+animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)  
+btn_pause.on_clicked(toggle_pause) #für buttonfunktion
 plt.show()
 
 
