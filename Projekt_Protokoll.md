@@ -195,13 +195,13 @@
       und in der Animation wurden Online-Recherche sowie KI-Unterstützung genutzt.
 
 ---
-# 26.5.26 - 
+# 26.5.26 
 - **Programmteile:** 
 	- Konzeptblatt aktualisiert: Abschnitt zur Rückskalierung der realen Abstände und Geschwindigkeiten hinzugefügt.
 	- Projektprotokoll auf aktuellen Stand gebracht. 
 
 ---
-# 1.6.26
+# 31.5.26 + 1.6.26
 - **Programmteile:**
 	- Kommentare am code geändert und weitere hinzugefügt.
  	- Optische Darstellung des Codes versucht zu verbessern.
