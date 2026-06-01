@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button
-import time
 
 
 
@@ -58,7 +57,6 @@ def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind masse
 time_start , time_end = 0, 10
 # zeitpunkte für auswertung 
 t_points = np.linspace(time_start, time_end, 2001) 
-t1 =time.time()
 
 #numerische lösung
 solution= solve_ivp(
