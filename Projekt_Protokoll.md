@@ -201,7 +201,7 @@
 	- Projektprotokoll auf aktuellen Stand gebracht. 
 
 ---
-#1.6.26
+# 1.6.26
 - **Programmteile:**
 	- Kommentare am code geändert und weitere hinzugefügt.
  	- Optische Darstellung des Codes versucht zu verbessern.
