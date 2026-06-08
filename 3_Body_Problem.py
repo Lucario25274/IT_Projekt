@@ -54,7 +54,7 @@ def system_odes(t, S, m1, m2, m3): #t ist zeit, S zustand, m1, m2, m3 sind masse
 
 
 #zeitspanne
-time_start , time_end = 0, 10
+time_start , time_end = 0, 20
 # zeitpunkte für auswertung 
 t_points = np.linspace(time_start, time_end, 2001) 
 
@@ -100,17 +100,17 @@ p3z_sol = solution.y[8]
 
 #Erstellung 3d grafik
 
-fig, ax = plt.subplots(subplot_kw={"projection":"3d"})
+fig, ax = plt.subplots(subplot_kw={"projection":"3d"}, figsize=(10, 8))
 
  #für die bahnen der planeten
-planet1_plt, = ax.plot(p1x_sol, p1y_sol, p1z_sol, 'green', label='Planet 1', linewidth=1)
-planet2_plt, = ax.plot(p2x_sol, p2y_sol, p2z_sol, 'red', label='Planet 2', linewidth=1)
-planet3_plt, = ax.plot(p3x_sol, p3y_sol, p3z_sol, 'blue', label='Planet 3', linewidth=1)
+planet1_plt, = ax.plot(p1x_sol, p1y_sol, p1z_sol, 'green', label='Planet 1', linewidth=2)
+planet2_plt, = ax.plot(p2x_sol, p2y_sol, p2z_sol, 'red', label='Planet 2', linewidth=2)
+planet3_plt, = ax.plot(p3x_sol, p3y_sol, p3z_sol, 'blue', label='Planet 3', linewidth=2)
 
 #für die planeten als punkte um nachzuverfolgen 
-planet1_dot, = ax.plot([p1x_sol[-1]], [p1y_sol[-1]], [p1z_sol[-1]], 'o', color='green', markersize=6)
-planet2_dot, = ax.plot([p2x_sol[-1]], [p2y_sol[-1]], [p2z_sol[-1]], 'o', color='red', markersize=6)
-planet3_dot, = ax.plot([p3x_sol[-1]], [p3y_sol[-1]], [p3z_sol[-1]], 'o', color='blue', markersize=6)
+planet1_dot, = ax.plot([p1x_sol[-1]], [p1y_sol[-1]], [p1z_sol[-1]], 'o', color='green', markersize=8)
+planet2_dot, = ax.plot([p2x_sol[-1]], [p2y_sol[-1]], [p2z_sol[-1]], 'o', color='red', markersize=8)
+planet3_dot, = ax.plot([p3x_sol[-1]], [p3y_sol[-1]], [p3z_sol[-1]], 'o', color='blue', markersize=8)
 
 #für vektor pfeile
 quiver1 = ax.quiver(p1x_sol[-1], p1y_sol[-1], p1z_sol[-1], v1x_sol[-1], v1y_sol[-1], v1z_sol[-1], color='green', length=2)
@@ -119,7 +119,7 @@ quiver3 = ax.quiver(p3x_sol[-1], p3y_sol[-1], p3z_sol[-1], v3x_sol[-1], v3y_sol[
 
 
 #einstellungen für grafik
-ax.set_title("Das 3-Körper Problem")
+ax.set_title("Das 3-Körper Problem"), fig.tight_layout()
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
@@ -128,9 +128,9 @@ plt.legend()
 
 #textdarstellung für anzeige der echten abstände und geschwindigkeiten in grafik
 info_text = ax.text2D(
-    0.01, 0.97, "", #länge, höhe
+    0.1, 0.97, "", #länge, höhe
     transform=fig.transFigure,
-    fontsize=8,
+    fontsize=10,
     verticalalignment='top',
     fontfamily='monospace',
     bbox=dict(boxstyle='round', facecolor='black', alpha=0.5), 
