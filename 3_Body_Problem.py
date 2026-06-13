@@ -139,13 +139,16 @@ info_text = ax.text2D(
 
 # berechnung für anzeige der realwerte fürs Standbild 
 #Endwerte 
-r12_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_2))
-r13_0 = np.linalg.norm(np.array(start_postion_1) - np.array(start_postion_3))
-r23_0 = np.linalg.norm(np.array(start_postion_2) - np.array(start_postion_3))
+r12_0 = np.linalg.norm(np.array([p1x_sol[-1], p1y_sol[-1], p1z_sol[-1]]) -
+                        np.array([p2x_sol[-1], p2y_sol[-1], p2z_sol[-1]]))
+r13_0 = np.linalg.norm(np.array([p1x_sol[-1], p1y_sol[-1], p1z_sol[-1]]) -
+                        np.array([p3x_sol[-1], p3y_sol[-1], p3z_sol[-1]]))
+r23_0 = np.linalg.norm(np.array([p2x_sol[-1], p2y_sol[-1], p2z_sol[-1]]) -
+                        np.array([p3x_sol[-1], p3y_sol[-1], p3z_sol[-1]]))
 
-geschwindigkeit1_0 = np.linalg.norm(start_geschwindigkeit_1)
-geschwindigkeit2_0 = np.linalg.norm(start_geschwindigkeit_2)
-geschwindigkeit3_0 = np.linalg.norm(start_geschwindigkeit_3)
+geschwindigkeit1_0 = np.linalg.norm([v1x_sol[-1], v1y_sol[-1], v1z_sol[-1]])
+geschwindigkeit2_0 = np.linalg.norm([v2x_sol[-1], v2y_sol[-1], v2z_sol[-1]])
+geschwindigkeit3_0 = np.linalg.norm([v3x_sol[-1], v3y_sol[-1], v3z_sol[-1]])
 
 #werte mit hilfe der referenzgrößen zurückskalieren und in AE und km/s umrechen und anziegen
 info_text.set_text(
@@ -158,7 +161,7 @@ info_text.set_text(
     f"  |v₂| = {geschwindigkeit2_0 * V / 1000:.2f} km/s\n"
     f"  |v₃| = {geschwindigkeit3_0 * V / 1000:.2f} km/s"
 )
-# plt.show()
+plt.show()
 
 
 
@@ -261,6 +264,6 @@ def update(frame):
     
 animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)  
 btn_pause.on_clicked(toggle_pause) #für buttonfunktion
-plt.show()
+# plt.show()
 
 
