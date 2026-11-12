@@ -161,7 +161,7 @@ info_text.set_text(
     f"  |v₂| = {geschwindigkeit2_0 * V / 1000:.2f} km/s\n"
     f"  |v₃| = {geschwindigkeit3_0 * V / 1000:.2f} km/s"
 )
-plt.show()
+
 
 
 
@@ -264,6 +264,6 @@ def update(frame):
     
 animation = FuncAnimation(fig, update, frames=range(0, len(t_points), 2), interval=10, blit=False)  
 btn_pause.on_clicked(toggle_pause) #für buttonfunktion
-# plt.show()
+plt.show()
 
 
